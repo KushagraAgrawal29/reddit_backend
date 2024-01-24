@@ -61,4 +61,139 @@ const postSchema = new mongoose.Schema({
         type: Boolean,
         default: false,
     },
-})
+    spoiler: {
+        type: String,
+    },
+    markedSpam: {
+        type: Boolean,
+        default: false,
+    },
+    sendReplies: {
+        type: Boolean,
+        default: true,
+    },
+    createdAt: {
+        type: Date,
+        required: true,
+    },
+    editedAt: {
+        type: Date,
+    },
+    deletedAt: {
+        type: Date,
+    },
+    flair: {
+        types: mongoose.Schema.Types.ObjectId,
+        ref: "Flair",
+    },
+    numberOfUpvotes: {
+        type: Number,
+        default: 0,
+    },
+    numberOfDownVotes: {
+        type: Number,
+        default: 0,
+    },
+    inSights: {
+        totalViews: {
+            type: Number,
+            default: 0,
+        },
+        upvoteRate: {
+            type: Number,
+            default: 0, // Calculated on the fly if not provided
+        },
+        communityKarma: {
+            type: Number,
+            default: 0,
+        },
+        totalShare: {
+            type: Number,
+            default: 0,
+        },
+    },
+    moderation: {
+        approve: {
+            approvedBy: {
+                type: String,
+            },
+              approvedDate: {
+                type: Date,
+            },
+        },
+        remove: {
+            removedBy: {
+                type: String,
+            },
+            removedDate: {
+                type: Date,
+            },
+        },
+        spam: {
+            spammedBy: {
+                type: String,
+            },
+            spammedDate: {
+                type: Date,
+            },
+        },
+        lock: {
+            type: Boolean,
+            default: false,
+        },
+    },
+    usersCommented: [
+        {
+            types: mongoose.Schema.Types.ObjectId,
+            ref: 'User',
+        },
+    ],
+    followingUsers: [
+        {
+            username: {
+                type: String,
+                required: true,
+            },
+            userId: {
+                type: mongoose.Schema.Types.ObjectId,
+                ref: "User",
+            },
+        },
+    ],
+    scheduleDate: {
+        type: Date,
+    },
+    scheduleTime: {
+        type: Number,
+    },
+    scheduleTimeZone: {
+        type: String,
+    },
+    hotScore: {
+        type: Number,
+        default: 0,
+    },
+    hotTimingScore: {
+        type: Number,
+        default: 0,
+    },
+    bestScore: {
+        type: Number,
+        default: 0,
+    },
+      bestTimingScore: {
+        type: Number,
+        default: 0,
+    },
+    numberOfVotes: {
+        type: Number,
+        default: 0,
+    },
+    numberOfViews: {
+        type: Number,
+        default: 0,
+    },
+});
+
+const Post = mongoose.model("Post",postSchema);
+module.exports = Post;
