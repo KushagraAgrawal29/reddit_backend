@@ -1,6 +1,6 @@
 const mongoose = require("momgoose");
 
-const messageSchema = mongoose.Schema({
+const messageSchema = new mongoose.Schema({
     subredditName: {
       type: String,
     },

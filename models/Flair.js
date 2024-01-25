@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-const flairSchema = mongoose.Schema({
+const flairSchema = new mongoose.Schema({
     flairName: {
       type: String,
       required: true,
