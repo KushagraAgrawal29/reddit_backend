@@ -8,6 +8,7 @@ import Token from "../models/VerifyToken.js";
 import { body, query, param } from "express-validator";
 
 import { hashPassword } from '../utils/passwordUtils.js';
+import { finalizeCreateUser } from '../utils/createUser.js';
 
 const signupValidator = [
     body("email")
@@ -25,6 +26,15 @@ const signupValidator = [
     body("password")
         .isLength({ min: 8 })
         .withMessage("Password must be at least 8 chars long"),
+];
+
+const usernameValidator = [
+    query("username")
+        .trim()
+        .not()
+        .isEmpty()
+        .withMessage("Username cannot be empty")
+        .escape()
 ];
 
 const signup = async (req,res) => {
